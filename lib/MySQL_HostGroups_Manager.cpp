@@ -6367,8 +6367,8 @@ bool MySQL_HostGroups_Manager::aws_aurora_replication_lag_action(int _whid, int 
 							if (_whid==(int)myhgc->hid)
 								if (mysrvc->status == MYSQL_SERVER_STATUS_OFFLINE_HARD) {
 									mysrvc->status = MYSQL_SERVER_STATUS_ONLINE;
-									proxy_warning("Re-enabling server %s:%d from HG %u because it is a writer\n", address, port, myhgc->hid);
-									ret = true;
+									proxy_warning("### SKIPPED BY ROCKY ### ---> Re-enabling server %s:%d from HG %u because it is a writer\n", address, port, myhgc->hid);
+									//ret = true;
 								}
 				//goto __exit_aws_aurora_replication_lag_action;
 			}
@@ -6764,7 +6764,9 @@ void MySQL_HostGroups_Manager::update_aws_aurora_set_reader(int _whid, int _rhid
 			sprintf(full_hostname, "%s%s", _server_id, domain_name);
 			bool found = false;
 			GloAdmin->mysql_servers_wrlock();
-			unsigned int max_max_connections = 10;
+			//// MODIFIED BY ROCKY ////
+			//unsigned int max_max_connections = 10;
+			unsigned int max_max_connections = 10000; //// changed 10 -> 10000
 			unsigned int max_use_ssl = 0;
 			wrlock();
 			MyHGC *myhgc=MyHGC_lookup(_rhid);
