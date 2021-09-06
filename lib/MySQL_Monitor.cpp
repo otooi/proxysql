@@ -4322,6 +4322,15 @@ void * monitor_AWS_Aurora_thread_HG(void *arg) {
 				mmsd->mysql_error_msg = new_error;
 				proxy_error("Error on AWS Aurora check for %s:%d after %lldms. Unable to create a connection. %sError: %s.\n", mmsd->hostname, mmsd->port, (now-mmsd->t1)/1000, (access_denied ? "" : "If the server is overload, increase mysql-monitor_connect_timeout. " ) , new_error);
 				MyHGM->p_update_mysql_error_counter(p_mysql_error_type::proxysql, mmsd->hostgroup_id, mmsd->hostname, mmsd->port, ER_PROXYSQL_AWS_HEALTH_CHECK_CONN_TIMEOUT);
+				
+				// disable host
+				int max_failures=mysql_thread___monitor_ping_max_failures;
+				bool rc_shun = false;
+				rc_shun = MyHGM->shun_and_killall(mmsd->hostname,mmsd->port);
+				if (rc_shun) {
+					proxy_error("### ADDED BY ROCKY ### ---> Server %s:%d missed %d heartbeats, shunning it and killing all the connections. Disabling other checks until the node comes back online.\n", mmsd->hostname, mmsd->port, max_failures);
+				}
+
 				goto __exit_monitor_aws_aurora_HG_thread;
 			}
 		}
