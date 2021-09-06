@@ -1,10 +1,10 @@
 <a><img src="https://i0.wp.com/proxysql.com/wp-content/uploads/2020/04/ProxySQL-Colour-Logo.png?fit=800%2C278&ssl=1" alt="ProxySQL"></a>
 
-두나무 변경 사항	
+변경 사항	
 ============	
 ![proxysql](https://user-images.githubusercontent.com/1762423/125238095-b3820280-e321-11eb-99f8-781bf17f3679.png)
 
-두나무에서는 ProxySQL 의 일부 기능, 버그를 변경해서 사용합니다. 변경 사항들은 아래에 기재해놓았습니다.   
+ProxySQL 의 일부 기능, 버그를 변경해서 사용합니다. 변경 사항들은 아래에 기재해놓았습니다.   
 - Aurora Failover 시 Writer, Reader 가 각각 hostgroup 에 중복으로 등록되는 문제 수정   
 - Aurora Instance 삭제 시 Shunned 상태로 변경되지 않고 Online 상태로 유지되는 문제 수정   
 - Aurora Reader 자동 추가 시 runtime_mysql_servers 테이블의 max_connections 컬럼 default 값을 10->10000으로 수정
