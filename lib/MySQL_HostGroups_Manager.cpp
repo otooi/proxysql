@@ -6766,7 +6766,7 @@ void MySQL_HostGroups_Manager::update_aws_aurora_set_reader(int _whid, int _rhid
 			GloAdmin->mysql_servers_wrlock();
 			//// MODIFIED BY ROCKY ////
 			//unsigned int max_max_connections = 10;
-			unsigned int max_max_connections = 1000; //// changed 10 -> 10000 -> 1000
+			unsigned int max_max_connections = 2000; //// changed 10 -> 10000 -> 2000
 			unsigned int max_use_ssl = 0;
 			wrlock();
 			MyHGC *myhgc=MyHGC_lookup(_rhid);
